@@ -16,3 +16,23 @@ function getHumanChoice() {
   const choice = prompt('rock, paper, or scissors?');
   return choice.toLowerCase();
 }
+function playRound(humanChoice, computerChoice) {
+  const human = humanChoice.toLowerCase();
+  if (
+    (human === 'rock' && computerChoice === 'rock') ||
+    (human === 'paper' && computerChoice === 'paper') ||
+    (human === 'scissors' && computerChoice === 'scissors')
+  ) {
+    console.log('Draw');
+  } else if (
+    (human === 'rock' && computerChoice === 'scissors') ||
+    (human === 'paper' && computerChoice === 'rock') ||
+    (human === 'scissors' && computerChoice === 'paper')
+  ) {
+    console.log(`You win, ${human} beats ${computerChoice}`);
+    humanScore++;
+  } else {
+    console.log(`You loose, ${computerChoice} beats ${human}`);
+    computerScore++;
+  }
+}
