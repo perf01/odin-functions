@@ -1,4 +1,3 @@
-console.log('hello');
 function getComputerChoice() {
   const random = Math.floor(Math.random() * 3 + 1);
   switch (random) {
@@ -9,4 +8,8 @@ function getComputerChoice() {
     case 3:
       return 'scissors';
   }
+}
+function getHumanChoice() {
+  const choice = prompt('rock, paper, or scissors?');
+  return choice.toLowerCase();
 }
