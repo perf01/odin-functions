@@ -1,5 +1,20 @@
-let humanScore = 0;
-let computerScore = 0;
+// const update = (a, b, x) => {
+//   if (x === 'x') {
+//     a++;
+//   } else {
+//     b++;
+//   }
+// };
+// const game = () => {
+//   let a = 0;
+//   let b = 0;
+//   update('x', a, b);
+//   update('x', a, b);
+//   update('y', a, b);
+//   console.log(a, b);
+// };
+// game();
+
 const getComputerChoice = () => {
   const random = Math.floor(Math.random() * 3 + 1);
   switch (random) {
@@ -13,9 +28,12 @@ const getComputerChoice = () => {
 };
 const getHumanChoice = () => {
   const choice = prompt('rock paper or scissors?');
-  const lowerChoice = choice.toLowerCase();
+  const lowerChoice = choice ? choice.toLowerCase() : choice;
   if (!choice) {
     alert('empty choice, type again!');
+    return getHumanChoice();
+  } else if (typeof choice === 'null') {
+    alert('Invalid input. Please enter rock, paper, or scissors.');
     return getHumanChoice();
   } else if (
     lowerChoice !== 'rock' &&
@@ -42,15 +60,15 @@ const getWinner = (human, computer) => {
   }
 };
 
-const addScore = (winner) => {
-  if (winner === 'human') {
-    humanScore++;
-  } else if (winner === 'computer') {
-    computerScore++;
-  }
-};
+// const addScore = (winner, humanScore, computerScore) => {
+//   if (winner === 'human') {
+//     return humanScore + 1;
+//   } else if (winner === 'computer') {
+//     return computerScore + 1;
+//   }
+// };
 
-const printResult = () => {
+const printResult = (humanScore, computerScore) => {
   if (humanScore > computerScore) {
     console.log(`You've won the game! ${humanScore}-${computerScore}`);
   } else if (humanScore < computerScore) {
@@ -61,18 +79,25 @@ const printResult = () => {
 };
 
 const playGame = () => {
+  let humanScore = 0;
+  let computerScore = 0;
   const playRound = () => {
     const human = getHumanChoice();
     const computer = getComputerChoice();
     const winner = getWinner(human, computer);
-    addScore(winner);
+    if (winner === 'human') {
+      humanScore++;
+    }
+    if (winner === 'computer') {
+      computerScore++;
+    }
   };
   playRound();
   playRound();
   playRound();
   playRound();
   playRound();
-  printResult();
+  printResult(humanScore, computerScore);
 };
 playGame();
 // const playRound = () => {
