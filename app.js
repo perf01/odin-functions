@@ -1,24 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-const buttons = document.querySelectorAll('.btn');
-buttons.forEach((btn) =>
-  btn.addEventListener('click', (event) => playRound(event))
-);
-const playRound = (event) => {
-  const human = event.target['ariaLabel'];
-  const computer = getComputerChoice();
-  console.log(human, computer);
-  const winner = getWinner(human, computer);
-  if (winner === 'human') {
-    humanScore++;
-  }
-  if (winner === 'computer') {
-    computerScore++;
-  }
-  if (humanScore === 5 || computerScore === 5) {
-    printResult();
-  }
-};
 const getComputerChoice = () => {
   const options = ['rock', 'paper', 'scissors'];
   const random = Math.floor(Math.random() * 3);
@@ -38,7 +17,7 @@ const getWinner = (human, computer) => {
   }
 };
 
-const printResult = () => {
+const printResult = (humanScore, computerScore) => {
   const resultLabel = document.querySelector('.result');
   if (humanScore > computerScore) {
     resultLabel.textContent = `You've won the game! ${humanScore}-${computerScore}`;
@@ -50,5 +29,23 @@ const printResult = () => {
 const playGame = () => {
   let humanScore = 0;
   let computerScore = 0;
-  printResult(humanScore, computerScore);
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach((btn) =>
+    btn.addEventListener('click', (event) => playRound(event))
+  );
+  const playRound = (event) => {
+    const human = event.target['ariaLabel'];
+    const computer = getComputerChoice();
+    const winner = getWinner(human, computer);
+    if (winner === 'human') {
+      humanScore++;
+    }
+    if (winner === 'computer') {
+      computerScore++;
+    }
+    if (humanScore === 5 || computerScore === 5) {
+      printResult(humanScore, computerScore);
+    }
+  };
 };
+playGame();
